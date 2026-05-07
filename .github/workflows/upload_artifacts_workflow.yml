@@ -53,6 +53,13 @@ jobs:
           path: "target/release/stwo_run_and_prove"
           destination: "stwo_run_and_prove_artifacts/${{ env.SHORT_HASH }}/release"
 
+      - name: Upload stwo_run_and_prove_recursive_tree binary to GCP
+        id: upload_stwo_run_and_prove_recursive_tree
+        uses: "google-github-actions/upload-cloud-storage@v2"
+        with:
+          path: "target/release/stwo_run_and_prove_recursive_tree"
+          destination: "stwo_run_and_prove_recursive_tree/${{ env.SHORT_HASH }}/release"
+
       - name: Build stwo_run_and_prove for znver5 architecture
         run: |
           CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_RUSTFLAGS="-C target-cpu=znver5" cargo build --release --target x86_64-unknown-linux-gnu --bin stwo-run-and-prove
